@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CalendarDays, DollarSign, TrendingUp, Users } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 
 interface Contribution {
   id: string;
@@ -61,11 +61,7 @@ const Contributions: React.FC = () => {
       setContributions(data || []);
     } catch (error) {
       console.error('Error fetching contributions:', error);
-      toast({
-        title: "Error",
-        description: "Failed to fetch contributions",
-        variant: "destructive",
-      });
+      toast.error("Failed to fetch contributions");
     } finally {
       setLoading(false);
     }
@@ -102,10 +98,7 @@ const Contributions: React.FC = () => {
 
       if (error) throw error;
 
-      toast({
-        title: "Success",
-        description: "Contribution recorded successfully",
-      });
+      toast.success("Contribution recorded successfully");
 
       setFormData({
         member_id: '',
@@ -117,11 +110,7 @@ const Contributions: React.FC = () => {
       fetchContributions();
     } catch (error) {
       console.error('Error recording contribution:', error);
-      toast({
-        title: "Error",
-        description: "Failed to record contribution",
-        variant: "destructive",
-      });
+      toast.error("Failed to record contribution");
     }
   };
 
